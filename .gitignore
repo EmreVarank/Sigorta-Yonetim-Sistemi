@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# PyInstaller
+*.spec
+dist/
+build/
+
+# SQLite databases (user data - not committed)
+*.db
+*.sqlite
+*.sqlite3
+
+# Excel files (user data / sample outputs - not committed)
+*.xlsx
+*.xls
+*.csv
+
+# PDF files (policy documents - confidential)
+*.pdf
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# OS
+desktop.ini
+.agent/
+
+# Backup folders (old structure)
+"Rapor kısmı"/
+"Muhasebe kısmı"/
+
+# Claude Code - geliştirme aracına ait dosyalar
+.claude/
+tmpclaude*
+KULLANIM_KILAVUZU.md
+build_exe.ps1
+muhasebe not.txt
