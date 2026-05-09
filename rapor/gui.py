@@ -247,10 +247,10 @@ class RaporGUI:
         self.filter_sirket = ttk.Combobox(
             filter_frame,
             font=('Arial', 8),
-            values=['Tumu', 'ALLIANZ', 'AXA', 'HDI', 'RAY', 'ETHICA', 'SOMPO', 'QUICK', 'DOGA', 'HEPIYI'],
+            values=['Tümü', 'AXA', 'ALLIANZ', 'HDI', 'RAY', 'ETHİCA', 'SOMPO', 'QUICK', 'DOĞA', 'HEPİYİ'],
             state='readonly'
         )
-        self.filter_sirket.set('Tumu')
+        self.filter_sirket.set('Tümü')
         self.filter_sirket.pack(fill=tk.X, padx=5, pady=(1, 3))
 
         # Plaka
@@ -583,10 +583,11 @@ class RaporGUI:
                     save_edit()
 
         elif widget_type == 'combo_sirket':
+            sirket_listesi = ['AXA', 'ALLIANZ', 'HDI', 'RAY', 'ETHİCA', 'SOMPO', 'QUICK', 'DOĞA', 'HEPİYİ']
             self.current_edit_entry = ttk.Combobox(self.tree,
-                values=['AXA', 'ALLIANZ', 'HDI', 'RAY', 'ETHICA', 'SOMPO', 'QUICK', 'DOGA', 'HEPIYI'],
-                font=('Arial', 9), state='readonly')
-            self.current_edit_entry.set(current_value if current_value in ['AXA', 'ALLIANZ', 'HDI', 'RAY', 'ETHICA', 'SOMPO', 'QUICK', 'DOGA', 'HEPIYI'] else 'AXA')
+                values=sirket_listesi,
+                font=('Arial', 9), state='normal')
+            self.current_edit_entry.set(current_value)
         elif widget_type == 'combo_aciklama':
             self.current_edit_entry = ttk.Combobox(self.tree,
                 values=['YASAR', 'KAMIL', 'TEZCAN', 'TEZER'],
@@ -706,7 +707,7 @@ class RaporGUI:
         if self.filter_tur.get() != 'Tumu':
             filters['tur'] = self.filter_tur.get()
 
-        if self.filter_sirket.get() != 'Tumu':
+        if self.filter_sirket.get() not in ('Tümü', ''):
             filters['sirket'] = self.filter_sirket.get()
 
         if self.filter_plaka.get().strip():
@@ -733,7 +734,7 @@ class RaporGUI:
         self.filter_sigortali.delete(0, tk.END)
         self.filter_police.delete(0, tk.END)
         self.filter_tur.set('Tumu')
-        self.filter_sirket.set('Tumu')
+        self.filter_sirket.set('Tümü')
         self.filter_plaka.delete(0, tk.END)
         self.filter_baslangic_tarih.delete(0, tk.END)
         self.filter_baslangic_tarih.insert(0, "DD.MM.YYYY")
