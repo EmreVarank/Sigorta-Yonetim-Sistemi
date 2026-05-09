@@ -583,11 +583,24 @@ class RaporGUI:
                     save_edit()
 
         elif widget_type == 'combo_sirket':
-            sirket_listesi = ['AXA', 'ALLIANZ', 'HDI', 'RAY', 'ETHİCA', 'SOMPO', 'QUICK', 'DOĞA', 'HEPİYİ']
+            sirket_listesi = ['AXA', 'ALLIANZ', 'HDI', 'RAY', 'ETHİCA', 'SOMPO', 'QUICK', 'DOĞA', 'HEPİYİ', 'DİĞER']
             self.current_edit_entry = ttk.Combobox(self.tree,
                 values=sirket_listesi,
-                font=('Arial', 9), state='normal')
-            self.current_edit_entry.set(current_value)
+                font=('Arial', 9), state='readonly')
+            self.current_edit_entry.set(current_value if current_value in sirket_listesi else 'AXA')
+
+            # DİĞER seçildiğinde elle giriş aç
+            def on_sirket_selected(e=None):
+                if self.current_edit_entry.get() == 'DİĞER':
+                    self.current_edit_entry.destroy()
+                    self.current_edit_entry = tk.Entry(self.tree, font=('Arial', 9))
+                    self.current_edit_entry.place(x=x, y=y, width=width, height=height)
+                    self.current_edit_entry.focus_set()
+                    self.current_edit_entry.bind('<Return>', save_edit)
+                    self.current_edit_entry.bind('<Escape>', cancel_edit)
+                    self.current_edit_entry.bind('<FocusOut>', save_edit)
+                else:
+                    save_edit()
         elif widget_type == 'combo_aciklama':
             self.current_edit_entry = ttk.Combobox(self.tree,
                 values=['YASAR', 'KAMIL', 'TEZCAN', 'TEZER'],
@@ -629,6 +642,8 @@ class RaporGUI:
         if isinstance(self.current_edit_entry, ttk.Combobox):
             if widget_type == 'combo_tur':
                 self.current_edit_entry.bind('<<ComboboxSelected>>', on_tur_selected)
+            elif widget_type == 'combo_sirket':
+                self.current_edit_entry.bind('<<ComboboxSelected>>', on_sirket_selected)
             else:
                 self.current_edit_entry.bind('<<ComboboxSelected>>', save_edit)
 
